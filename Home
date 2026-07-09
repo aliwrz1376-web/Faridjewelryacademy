@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آموزشگاه طلاسازی فرید | محمودآباد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0d0d0d;
+    --black-2:#141210;
+    --panel:#1a1712;
+    --panel-2:#211c14;
+    --gold:#c9a227;
+    --gold-bright:#e8c766;
+    --gold-dim:#7d661d;
+    --ivory:#f3ede0;
+    --ivory-dim:#c9c2b2;
+    --line: rgba(201,162,39,0.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--ivory);
+    font-family:'Vazirmatn', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--gold);color:#0d0d0d;}
+
+  /* scrollbar */
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-track{background:var(--black);}
+  ::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:10px;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;right:0;left:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;
+    background:linear-gradient(180deg, rgba(13,13,13,0.85), rgba(13,13,13,0));
+    backdrop-filter:blur(6px);
+    transition:background .4s ease, box-shadow .4s ease, padding .4s ease;
+  }
+  header.nav.scrolled{
+    background:rgba(13,13,13,0.82);
+    box-shadow:0 1px 0 var(--line);
+    padding:12px 28px;
+  }
+  .logo{
+    font-weight:800;font-size:1.15rem;letter-spacing:.5px;
+    display:flex;align-items:center;gap:8px;color:var(--ivory);
+  }
+  .logo span{color:var(--gold-bright);}
+  nav.links{display:flex;gap:30px;font-size:.92rem;color:var(--ivory-dim);}
+  nav.links a{position:relative;padding:4px 0;transition:color .3s;}
+  nav.links a:hover{color:var(--gold-bright);}
+  nav.links a::after{
+    content:'';position:absolute;bottom:-2px;right:0;width:0;height:1px;
+    background:var(--gold);transition:width .3s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  .nav-cta{display:none;}
+  @media(min-width:860px){.nav-cta{display:block;}}
+
+  .burger{display:none;}
+  @media(max-width:859px){
+    nav.links{display:none;}
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:15px 34px;border-radius:999px;font-weight:600;font-size:.95rem;
+    cursor:pointer;border:1px solid transparent;transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-gold{
+    background:linear-gradient(135deg, var(--gold-bright), var(--gold) 60%, #a9821e);
+    color:#1a1204;
+    box-shadow:0 0 0 rgba(201,162,39,0);
+  }
+  .btn-gold:hover{
+    box-shadow:0 8px 30px rgba(201,162,39,0.45), 0 0 40px rgba(201,162,39,0.25);
+    transform:translateY(-2px);
+  }
+  .btn-ghost{
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(243,237,224,0.35);
+    color:var(--ivory);
+  }
+  .btn-ghost:hover{
+    border-color:var(--gold-bright);
+    color:var(--gold-bright);
+    transform:translateY(-2px);
+  }
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;padding:140px 24px 80px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 15%, rgba(201,162,39,0.16), transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(201,162,39,0.10), transparent 60%),
+      var(--black);
+  }
+  #embers{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.85;}
+  .hero-inner{position:relative;z-index:2;max-width:820px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    color:var(--gold-bright);font-size:.82rem;letter-spacing:2px;
+    border:1px solid var(--line);padding:8px 18px;border-radius:999px;
+    margin-bottom:28px;background:rgba(201,162,39,0.05);
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-bright);
+    box-shadow:0 0 10px var(--gold-bright);}
+  h1.title{
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    font-weight:800;line-height:1.18;
+    background:linear-gradient(180deg, #fff 10%, var(--gold-bright) 60%, var(--gold-dim) 120%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:26px;
+  }
+  .sub{
+    font-size:clamp(1rem,2vw,1.2rem);
+    color:var(--ivory-dim);line-height:2.1;margin-bottom:40px;
+  }
+  .sub b{color:var(--ivory);font-weight:600;}
+  .stats{
+    margin-top:70px;display:flex;gap:60px;flex-wrap:wrap;justify-content:center;
+  }
+  .stat{text-align:center;}
+  .stat .num{
+    font-size:2.4rem;font-weight:800;color:var(--gold-bright);
+    font-variant-numeric:tabular-nums;
+  }
+  .stat .lbl{color:var(--ivory-dim);font-size:.88rem;margin-top:6px;}
+
+  .scroll-cue{
+    position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+    width:1px;height:46px;background:linear-gradient(var(--gold-bright), transparent);
+    z-index:2;
+  }
+  .scroll-cue::after{
+    content:'';position:absolute;top:0;right:-3px;width:7px;height:7px;border-radius:50%;
+    background:var(--gold-bright);animation:cue 2.2s ease-in-out infinite;
+  }
+  @keyframes cue{0%{top:0;opacity:1;}90%{opacity:0;}100%{top:44px;opacity:0;}}
+
+  /* divider */
+  .molten-divider{
+    height:2px;width:100%;
+    background:linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold-bright) 50%, var(--gold) 80%, transparent);
+    opacity:.5;
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:120px 0;position:relative;}
+  .section-head{max-width:640px;margin-bottom:60px;}
+  .section-head .kicker{
+    color:var(--gold-bright);font-size:.85rem;letter-spacing:2px;font-weight:600;
+    display:block;margin-bottom:14px;
+  }
+  h2.section-title{
+    font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;color:var(--ivory);line-height:1.4;
+  }
+  h2.section-title em{color:var(--gold-bright);font-style:normal;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- WHY SECTION ---------- */
+  .why{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;}
+  @media(min-width:900px){.why{grid-template-columns:1fr 1fr;}}
+  .why-media{order:1;}
+  .why-media .frame{
+    position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;
+    background:
+      linear-gradient(160deg, #2a2313, #100d08 70%);
+    border:1px solid var(--line);
+  }
+  .why-media .frame .glow{
+    position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 20%, rgba(232,199,102,0.35), transparent 55%);
+  }
+  .why-media .frame svg{position:absolute;inset:0;width:100%;height:100%;}
+  .why-text{order:2;}
+  .why-text .lead{font-size:1.28rem;color:var(--ivory);line-height:2;margin-bottom:18px;font-weight:600;}
+  .why-text p{color:var(--ivory-dim);line-height:2;margin-bottom:30px;}
+  .checklist{display:grid;gap:16px;}
+  .checklist li{
+    list-style:none;display:flex;align-items:center;gap:12px;
+    color:var(--ivory);font-size:1rem;
+  }
+  .checklist li .tick{
+    width:26px;height:26px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(201,162,39,0.12);border:1px solid var(--gold-dim);color:var(--gold-bright);
+    font-size:.8rem;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative;max-width:900px;margin:0 auto;}
+  .timeline::before{
+    content:'';position:absolute;top:0;bottom:0;right:29px;width:1px;
+    background:linear-gradient(var(--gold-dim), transparent 95%);
+  }
+  @media(min-width:760px){.timeline::before{right:50%;}}
+  .t-item{
+    position:relative;padding-right:76px;margin-bottom:52px;
+  }
+  @media(min-width:760px){
+    .t-item{width:50%;padding-right:0;}
+    .t-item:nth-child(odd){padding-left:56px;text-align:left;}
+    .t-item:nth-child(even){margin-right:50%;padding-right:56px;text-align:right;}
+  }
+  .t-num{
+    position:absolute;top:0;right:0;width:58px;height:58px;border-radius:50%;
+    background:linear-gradient(135deg, var(--gold-bright), var(--gold-dim));
+    color:#1a1204;font-weight:800;font-size:1.2rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 6px var(--black), 0 0 26px rgba(201,162,39,0.35);
+  }
+  @media(min-width:760px){
+    .t-item:nth-child(odd) .t-num{right:auto;left:-29px;}
+    .t-item:nth-child(even) .t-num{right:-29px;}
+  }
+  .t-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;
+  }
+  .t-card h3{font-size:1.08rem;color:var(--ivory);margin-bottom:6px;}
+  .t-card p{color:var(--ivory-dim);font-size:.92rem;line-height:1.9;}
+
+  /* ---------- COURSES ---------- */
+  .courses-grid{display:grid;grid-template-columns:1fr;gap:26px;}
+  @media(min-width:680px){.courses-grid{grid-template-columns:1fr 1fr;}}
+  .course-card{
+    position:relative;border-radius:22px;padding:36px 30px;
+    background:linear-gradient(165deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+    border:1px solid rgba(243,237,224,0.12);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    overflow:hidden;
+    transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .course-card::before{
+    content:'';position:absolute;top:-40%;left:-20%;width:70%;height:70%;
+    background:radial-gradient(circle, rgba(201,162,39,0.22), transparent 60%);
+    pointer-events:none;
+  }
+  .course-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold-dim);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  }
+  .course-icon{font-size:2rem;margin-bottom:20px;display:block;}
+  .course-card h3{font-size:1.25rem;color:var(--ivory);margin-bottom:10px;}
+  .course-card p{color:var(--ivory-dim);font-size:.95rem;line-height:1.8;}
+  .course-tag{
+    position:absolute;top:24px;left:28px;font-size:.72rem;color:var(--gold-bright);
+    border:1px solid var(--gold-dim);padding:4px 12px;border-radius:999px;opacity:.85;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media(min-width:720px){.gallery{grid-template-columns:repeat(3,1fr);}}
+  .g-item{
+    position:relative;aspect-ratio:1/1;border-radius:16px;overflow:hidden;
+    border:1px solid var(--line);
+    background:linear-gradient(150deg, #2a2313, #0d0b07 75%);
+  }
+  .g-item .art{
+    position:absolute;inset:0;transition:transform .6s ease;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .g-item:hover .art{transform:scale(1.12);}
+  .g-item .cap{
+    position:absolute;right:0;bottom:0;left:0;padding:16px;
+    background:linear-gradient(0deg, rgba(0,0,0,0.72), transparent);
+    font-size:.85rem;color:var(--ivory-dim);
+    transform:translateY(10px);opacity:0;transition:all .35s ease;
+  }
+  .g-item:hover .cap{transform:translateY(0);opacity:1;}
+
+  /* ---------- WHY GOLDSMITHING (dark quote) ---------- */
+  .quote-section{
+    background:radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.10), transparent 60%), #090808;
+    text-align:center;
+  }
+  .quote-section blockquote{
+    max-width:760px;margin:0 auto 56px;font-size:clamp(1.4rem,3vw,2.1rem);
+    font-weight:700;line-height:1.7;color:var(--ivory);
+  }
+  .quote-section blockquote span{color:var(--gold-bright);}
+  .value-icons{display:flex;gap:44px;justify-content:center;flex-wrap:wrap;}
+  .value{display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--ivory-dim);font-size:.92rem;}
+  .value .ic{
+    width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:rgba(201,162,39,0.08);border:1px solid var(--gold-dim);font-size:1.6rem;
+  }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .t-grid{display:grid;grid-template-columns:1fr;gap:22px;}
+  @media(min-width:820px){.t-grid{grid-template-columns:repeat(3,1fr);}}
+  .t-card2{
+    background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px;
+    transition:transform .4s ease;
+  }
+  .t-card2:hover{transform:translateY(-6px);}
+  .stars{color:var(--gold-bright);letter-spacing:3px;margin-bottom:16px;font-size:1rem;}
+  .t-card2 p{color:var(--ivory-dim);line-height:1.9;font-size:.98rem;margin-bottom:20px;}
+  .t-author{font-size:.86rem;color:var(--ivory);font-weight:600;}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:820px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:right;background:none;border:none;color:var(--ivory);
+    font-family:inherit;font-size:1.05rem;font-weight:600;
+    padding:26px 4px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:20px;
+  }
+  .faq-q .plus{
+    flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--gold-dim);
+    color:var(--gold-bright);display:flex;align-items:center;justify-content:center;
+    transition:transform .35s ease;font-size:1.1rem;
+  }
+  .faq-item.open .faq-q .plus{transform:rotate(135deg);}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .4s ease;
+  }
+  .faq-a p{color:var(--ivory-dim);line-height:1.9;padding:0 4px 26px;max-width:640px;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    position:relative;padding:0;overflow:hidden;
+    min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  }
+  .final-cta .bg{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(201,162,39,0.22), transparent 60%),
+      linear-gradient(180deg, #100d08, #000 80%);
+  }
+  .final-inner{position:relative;z-index:2;max-width:640px;padding:0 24px;}
+  .final-inner h2{
+    font-size:clamp(1.9rem,4vw,2.8rem);color:var(--ivory);font-weight:800;margin-bottom:20px;line-height:1.5;
+  }
+  .final-inner p{color:var(--ivory-dim);font-size:1.05rem;line-height:2;margin-bottom:40px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);padding:56px 0 34px;background:#0a0908;
+  }
+  .foot-grid{
+    display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;align-items:flex-start;
+    margin-bottom:40px;
+  }
+  .foot-info{display:flex;flex-direction:column;gap:14px;color:var(--ivory-dim);font-size:.94rem;}
+  .foot-info a{display:flex;align-items:center;gap:10px;transition:color .3s;}
+  .foot-info a:hover{color:var(--gold-bright);}
+  .foot-note{
+    text-align:center;color:var(--ivory-dim);font-size:.8rem;opacity:.6;
+    border-top:1px solid var(--line);padding-top:24px;
+  }
+
+  @media(max-width:640px){
+    section{padding:80px 0;}
+    .stats{gap:30px;}
+    .value-icons{gap:26px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <div class="logo">فرید <span>طلاسازی</span></div>
+  <nav class="links">
+    <a href="#why">چرا فرید</a>
+    <a href="#path">مسیر یادگیری</a>
+    <a href="#courses">دوره‌ها</a>
+    <a href="#gallery">گالری</a>
+    <a href="#faq">سوالات</a>
+  </nav>
+  <div class="nav-cta"><a href="#courses" class="btn btn-gold" style="padding:10px 24px;font-size:.85rem;">ثبت‌نام دوره</a></div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <canvas id="embers"></canvas>
+  <div class="hero-inner">
+    <span class="eyebrow">اولین آموزشگاه آزاد طلاسازی در محمودآباد</span>
+    <h1 class="title">هنر را به طلا تبدیل کن.</h1>
+    <p class="sub">
+      دارای <b>مجوز رسمی</b> از سازمان فنی و حرفه‌ای کشور<br>
+      آموزش کاملاً <b>عملی</b> همراه با ارائه <b>مدرک معتبر</b>
+    </p>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="#courses" class="btn btn-gold">ثبت‌نام دوره‌ها</a>
+      <a href="#contact" class="btn btn-ghost">مشاوره رایگان</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num" data-count="450">۰</div><div class="lbl">هنرجویان آموزش‌دیده</div></div>
+      <div class="stat"><div class="num" data-count="4">۰</div><div class="lbl">دوره‌های تخصصی</div></div>
+      <div class="stat"><div class="num" data-count="1">۰</div><div class="lbl">آموزش عملی از روز اول</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
+<div class="molten-divider"></div>
+
+<!-- ================= WHY ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="why reveal">
+      <div class="why-media">
+        <div class="frame">
+          <div class="glow"></div>
+          <svg viewBox="0 0 300 375" fill="none">
+            <circle cx="150" cy="150" r="60" stroke="#e8c766" stroke-width="1.4" opacity=".55"/>
+            <circle cx="150" cy="150" r="42" stroke="#e8c766" stroke-width="1.4" opacity=".8"/>
+            <path d="M150 90 L150 60 M150 210 L150 240 M90 150 L60 150 M210 150 L240 150" stroke="#e8c766" stroke-width="1.4" opacity=".5"/>
+            <circle cx="150" cy="150" r="18" fill="#e8c766" opacity=".9"/>
+          </svg>
+        </div>
+        <p style="text-align:center;color:var(--ivory-dim);font-size:.78rem;margin-top:10px;opacity:.6;">
+          تصویر استاد در حال آموزش — جایگزین با عکس واقعی کارگاه
+        </p>
+      </div>
+      <div class="why-text">
+        <span class="kicker" style="color:var(--gold-bright);font-size:.85rem;letter-spacing:2px;display:block;margin-bottom:14px;">چرا آموزشگاه فرید؟</span>
+        <p class="lead">یادگیری فقط با دیدن اتفاق نمی‌افتد…</p>
+        <p>در این آموزشگاه از همان جلسه اول، ابزار در دستان شماست. تمام آموزش‌ها به‌صورت کاملاً عملی برگزار می‌شود تا پس از پایان دوره، آماده‌ی ورود به بازار کار باشید.</p>
+        <ul class="checklist">
+          <li><span class="tick">✓</span> آموزش از پایه</li>
+          <li><span class="tick">✓</span> تجهیزات کامل کارگاهی</li>
+          <li><span class="tick">✓</span> کلاس‌های محدود</li>
+          <li><span class="tick">✓</span> پشتیبانی بعد از پایان دوره</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section id="path" style="background:var(--black-2);">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin:0 auto 70px;text-align:center;max-width:600px;">
+      <span class="kicker">شش گام تا استادکاری</span>
+      <h2 class="section-title">مسیر <em>یادگیری</em> شما</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item reveal"><div class="t-num">۱</div><div class="t-card"><h3>آشنایی با ابزار</h3><p>شناخت کامل ابزارآلات و کارگاه طلاسازی، پیش‌نیاز هر ساخت‌وسازی است.</p></div></div>
+      <div class="t-item reveal"><div class="t-num">۲</div><div class="t-card"><h3>ذوب و آلیاژسازی</h3><p>یادگیری اصول ذوب طلا و ترکیب فلزات برای رسیدن به عیار مناسب.</p></div></div>
+      <div class="t-item reveal"><div class="t-num">۳</div><div class="t-card"><h3>برش و فرم‌دهی</h3><p>تبدیل فلز خام به شکل اولیه‌ی طرح، با دقت و صبر.</p></div></div>
+      <div class="t-item reveal"><div class="t-num">۴</div><div class="t-card"><h3>لحیم‌کاری</h3><p>اتصال دقیق قطعات، مهم‌ترین مهارت فنی یک طلاساز حرفه‌ای.</p></div></div>
+      <div class="t-item reveal"><div class="t-num">۵</div><div class="t-card"><h3>پرداخت نهایی</h3><p>صیقل و درخشش نهایی؛ جایی که قطعه، جواهر می‌شود.</p></div></div>
+      <div class="t-item reveal"><div class="t-num">۶</div><div class="t-card"><h3>ساخت اولین قطعه توسط هنرجو</h3><p>لحظه‌ای که هنرجو، اولین ساخته‌ی خود را با دستان خویش تحویل می‌گیرد.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COURSES ================= -->
+<section id="courses">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">دوره‌های آموزشی</span>
+      <h2 class="section-title">مسیر خودت را <em>انتخاب کن</em></h2>
+    </div>
+    <div class="courses-grid reveal">
+      <div class="course-card">
+        <span class="course-tag">مبتدی</span>
+        <span class="course-icon">💍</span>
+        <h3>دوره مقدماتی</h3>
+        <p>شروع از صفر، بدون نیاز به تجربه‌ی قبلی. پایه‌ای‌ترین اصول طلاسازی را عملی یاد می‌گیری.</p>
+      </div>
+      <div class="course-card">
+        <span class="course-tag">حرفه‌ای</span>
+        <span class="course-icon">✨</span>
+        <h3>دوره پیشرفته</h3>
+        <p>ساخت انواع زیورآلات حرفه‌ای با تکنیک‌های تخصصی‌تر و پروژه‌های واقعی بازار.</p>
+      </div>
+      <div class="course-card">
+        <span class="course-tag">سریع</span>
+        <span class="course-icon">🔨</span>
+        <h3>تعمیرات طلا</h3>
+        <p>مهارتی کاربردی برای ورود سریع‌تر به بازار کار و درآمدزایی زودهنگام.</p>
+      </div>
+      <div class="course-card">
+        <span class="course-tag">خلاقانه</span>
+        <span class="course-icon">💎</span>
+        <h3>طراحی و ساخت جواهر</h3>
+        <p>از ایده تا محصول نهایی؛ برای کسانی که می‌خواهند طراح و سازنده باشند.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery" style="background:var(--black-2);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">نگاهی به کارگاه</span>
+      <h2 class="section-title"><em>گالری</em> آموزشگاه</h2>
+    </div>
+    <div class="gallery reveal">
+      <div class="g-item"><div class="art">🧑‍🎓</div><div class="cap">هنرجویان هنگام کار</div></div>
+      <div class="g-item"><div class="art">🛠️</div><div class="cap">میز ابزار</div></div>
+      <div class="g-item"><div class="art">💍</div><div class="cap">انگشترهای ساخته‌شده</div></div>
+      <div class="g-item"><div class="art">📿</div><div class="cap">گردنبندها</div></div>
+      <div class="g-item"><div class="art">🏫</div><div class="cap">کلاس آموزشی</div></div>
+      <div class="g-item"><div class="art">✨</div><div class="cap">پرداخت نهایی</div></div>
+    </div>
+    <p style="text-align:center;color:var(--ivory-dim);font-size:.78rem;margin-top:18px;opacity:.55;">
+      تصاویر بالا جایگزین هستند — با عکس‌های واقعی کارگاه جایگزین شوند
+    </p>
+  </div>
+</section>
+
+<!-- ================= WHY GOLDSMITHING ================= -->
+<section class="quote-section">
+  <div class="wrap reveal">
+    <blockquote>مهارتی یاد بگیرید که <span>سال‌ها ارزش خود را حفظ می‌کند.</span></blockquote>
+    <div class="value-icons">
+      <div class="value"><div class="ic">💰</div>درآمدزایی</div>
+      <div class="value"><div class="ic">🎨</div>خلاقیت</div>
+      <div class="value"><div class="ic">🧑‍🔧</div>کار شخصی</div>
+      <div class="value"><div class="ic">🏭</div>راه‌اندازی کارگاه</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">تجربه‌ی هنرجویان</span>
+      <h2 class="section-title">نظر <em>هنرجویان</em></h2>
+    </div>
+    <div class="t-grid reveal">
+      <div class="t-card2">
+        <div class="stars">★★★★★</div>
+        <p>قبل از این دوره هیچ تجربه‌ای نداشتم، اما امروز اولین سفارش ساخت انگشترم را تحویل داده‌ام.</p>
+        <div class="t-author">هنرجوی دوره مقدماتی</div>
+      </div>
+      <div class="t-card2">
+        <div class="stars">★★★★★</div>
+        <p>فضای آموزشی کاملاً عملی و حرفه‌ای بود.</p>
+        <div class="t-author">هنرجوی دوره پیشرفته</div>
+      </div>
+      <div class="t-card2">
+        <div class="stars">★★★★★</div>
+        <p>مدرک معتبر و آموزش کاربردی باعث شد سریع وارد بازار کار شوم.</p>
+        <div class="t-author">هنرجوی دوره تعمیرات طلا</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="background:var(--black-2);">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin:0 auto 40px;text-align:center;max-width:600px;">
+      <span class="kicker">سوالات متداول</span>
+      <h2 class="section-title">هر چیزی که باید <em>بدانید</em></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">آیا از صفر آموزش داده می‌شود؟ <span class="plus">+</span></button>
+        <div class="faq-a"><p>بله، دوره مقدماتی برای افرادی طراحی شده که هیچ تجربه‌ای در طلاسازی ندارند و آموزش کاملاً از پایه انجام می‌شود.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">مدت دوره چقدر است؟ <span class="plus">+</span></button>
+        <div class="faq-a"><p>مدت هر دوره بسته به سطح (مقدماتی، پیشرفته، تعمیرات یا طراحی) متفاوت است. برای اطلاع از زمان‌بندی دقیق با ما تماس بگیرید.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">مدرک معتبر است؟ <span class="plus">+</span></button>
+        <div class="faq-a"><p>بله، مدرک پایان دوره با مجوز رسمی از سازمان فنی و حرفه‌ای کشور صادر می‌شود.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">بعد از پایان دوره امکان ورود به بازار کار وجود دارد؟ <span class="plus">+</span></button>
+        <div class="faq-a"><p>بله، آموزش‌ها کاملاً عملی است و پس از پایان دوره، هنرجویان از پشتیبانی آموزشگاه نیز برخوردار می‌شوند.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final-cta" id="contact">
+  <div class="bg"></div>
+  <div class="final-inner reveal">
+    <h2>آماده شروع هستی؟</h2>
+    <p>امروز اولین قدم را بردار… چند ماه بعد شاید اولین قطعه طلایی که می‌سازی، آغاز مسیر حرفه‌ای تو باشد.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="#courses" class="btn btn-gold">ثبت‌نام دوره</a>
+      <a href="tel:09112202513" class="btn btn-ghost">تماس با آموزشگاه</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="logo">فرید <span>طلاسازی</span></div>
+      <div class="foot-info">
+        <a href="tel:09112202513">📞 ۰۹۱۱۲۲۰۲۵۱۳</a>
+        <a href="#">📍 محمودآباد</a>
+        <a href="https://instagram.com/farid.jewelry.academy" target="_blank">📷 Instagram — @farid.jewelry.academy</a>
+      </div>
+    </div>
+    <div class="foot-note">© آموزشگاه طلاسازی فرید — تمامی حقوق محفوظ است.</div>
+  </div>
+</footer>
+
+<script>
+  // nav scroll state
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // stat counters
+  const statEls = document.querySelectorAll('.stat .num');
+  const toFa = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  const counterIO = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        let cur = 0;
+        const step = Math.max(1, Math.round(target/40));
+        const t = setInterval(()=>{
+          cur += step;
+          if(cur >= target){ cur = target; clearInterval(t); }
+          el.textContent = toFa(cur) + (target >= 100 ? '+' : '');
+        }, 30);
+        counterIO.unobserve(el);
+      }
+    });
+  }, {threshold:.5});
+  statEls.forEach(el=>counterIO.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ember canvas — forge sparks rising through the hero
+  const canvas = document.getElementById('embers');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize(){
+    W = canvas.width = canvas.offsetWidth * devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function spawn(){
+    particles.push({
+      x: Math.random()*W,
+      y: H + 10,
+      r: Math.random()*2 + 0.6,
+      speed: (Math.random()*0.6 + 0.25) * devicePixelRatio,
+      drift: (Math.random()-0.5) * 0.5,
+      life: 0,
+      maxLife: Math.random()*300 + 200,
+      hue: Math.random() > 0.5 ? '201,162,39' : '232,199,102'
+    });
+  }
+
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    if(!reduceMotion && particles.length < 90 && Math.random() < 0.6) spawn();
+    particles.forEach(p=>{
+      p.y -= p.speed;
+      p.x += p.drift;
+      p.life++;
+      const fade = 1 - p.life/p.maxLife;
+      if(fade > 0){
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r*devicePixelRatio, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${p.hue},${Math.max(0,fade*0.8)})`;
+        ctx.shadowColor = `rgba(${p.hue},0.8)`;
+        ctx.shadowBlur = 6*devicePixelRatio;
+        ctx.fill();
+      }
+    });
+    particles = particles.filter(p=> p.life < p.maxLife && p.y > -10);
+    requestAnimationFrame(tick);
+  }
+  tick();
+</script>
+</body>
+</html>
